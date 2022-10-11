@@ -8,13 +8,13 @@
   import DateTimePicker from './DatePicker.svelte'
   import { writable } from 'svelte/store'
   import { createEventDispatcher } from 'svelte'
-  import { parse as dateParse, isValid, format as dateFormat } from 'date-fns';
+  import { parse as dateParse, isValid } from 'date-fns';
   import { enGB } from 'date-fns/locale';
 
   const dispatch = createEventDispatcher<{ select: undefined }>()
 
   /** Default date to display in picker before value is assigned */
-  const defaultDate = new Date()
+  export let defaultDate
 
   // inner date value store for preventing value updates (and also
   // text updates as a result) when date is unchanged
@@ -35,13 +35,13 @@
   })()
 
   /** Date value */
-  export let value: Date | null = null
+  export let value: Date | null = defaultDate
   $: store.set(value)
 
   /** The earliest value the user can select */
-  export let min = new Date(defaultDate.getFullYear() - 20, 0, 1)
+  export let min = new Date((defaultDate?.getFullYear() ?? new Date()) - 20, 0, 1)
   /** The latest value the user can select */
-  export let max = new Date(defaultDate.getFullYear(), 11, 31, 23, 59, 59, 999)
+  export let max = new Date((defaultDate?.getFullYear() ?? new Date()), 11, 31, 23, 59, 59, 999)
   /** Placeholder text to show when input field is empty */
   export let placeholder = '2020-12-31 23:00:00'
   /** Whether the text is valid */
@@ -74,7 +74,7 @@
       if (isValid(parsedDate)) {
         min = parsedDate
       } else {
-        min = new Date(defaultDate.getFullYear() - 20, 0, 1)
+        min = new Date((defaultDate?.getFullYear() ?? new Date()) - 20, 0, 1)
       }
     }
     if (typeof max === "string") {
@@ -82,7 +82,7 @@
       if (isValid(parsedDate)) {
         max = parsedDate
       } else {
-        max = new Date(defaultDate.getFullYear(), 11, 31, 23, 59, 59, 999)
+        max = new Date((defaultDate?.getFullYear() ?? new Date()), 11, 31, 23, 59, 59, 999)
       }
     }
   }

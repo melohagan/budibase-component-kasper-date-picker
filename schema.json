@@ -41,18 +41,28 @@
         "key": "max"
       },
       {
-        "type": "text",
-        "label": "Format",
-        "key": "format"
-      },
-      {
-        "type": "text",
+        "type": "select",
         "label": "Locale",
-        "key": "locale"
+        "key": "locale",
+        "options": [
+          "enUS",
+          "enGB",
+          "bn",
+          "da",
+          "de",
+          "es",
+          "fr",
+          "it",
+          "ja",
+          "ptBR",
+          "ru",
+          "zhCN"
+        ],
+        "defaultValue": "enUS"
       },
       {
         "type": "boolean",
-        "label": "Show calendar?",
+        "label": "Show calendar",
         "key": "showCalendar",
         "defaultValue": true
       },
