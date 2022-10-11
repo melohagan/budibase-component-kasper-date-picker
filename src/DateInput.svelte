@@ -8,6 +8,8 @@
   import DateTimePicker from './DatePicker.svelte'
   import { writable } from 'svelte/store'
   import { createEventDispatcher } from 'svelte'
+  import { parse as dateParse, isValid, format as dateFormat } from 'date-fns';
+  import { enGB } from 'date-fns/locale';
 
   const dispatch = createEventDispatcher<{ select: undefined }>()
 
@@ -46,6 +48,8 @@
   export let valid = true
   /** Disable the input **/
   export let disabled = false
+  /** Disable the calender **/
+  export let showCalendar = true
 
   /** Format string */
   export let format = 'yyyy-MM-dd HH:mm:ss'
@@ -63,6 +67,25 @@
   export let text = toText($store, formatTokens)
   let textHistory = [text, text]
   $: textHistory = [textHistory[1], text]
+
+  $: {
+    if (typeof min === "string") {
+      const parsedDate = dateParse(min, format, new Date(), { locale: enGB });
+      if (isValid(parsedDate)) {
+        min = parsedDate
+      } else {
+        min = new Date(defaultDate.getFullYear() - 20, 0, 1)
+      }
+    }
+    if (typeof max === "string") {
+      const parsedDate = dateParse(max, format, new Date(), { locale: enGB });
+      if (isValid(parsedDate)) {
+        max = parsedDate
+      } else {
+        max = new Date(defaultDate.getFullYear(), 11, 31, 23, 59, 59, 999)
+      }
+    }
+  }
 
   function textUpdate(text: string, formatTokens: FormatToken[]) {
     if (text.length) {
@@ -163,6 +186,7 @@
         {max}
         {locale}
         {browseWithoutSelecting}
+        {showCalendar}
       />
     </div>
   {/if}

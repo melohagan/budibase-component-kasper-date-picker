@@ -21,7 +21,8 @@
       {
         "type": "text",
         "label": "Placeholder",
-        "key": "placeholder"
+        "key": "placeholder",
+        "defaultValue": "2020-12-31 23:00:00"
       },
       {
         "type": "text",
@@ -31,7 +32,8 @@
       {
         "type": "text",
         "label": "Earliest",
-        "key": "min"
+        "key": "min",
+        "defaultValue": "2001-01-01 00:00:00"
       },
       {
         "type": "text",
@@ -49,15 +51,10 @@
         "key": "locale"
       },
       {
-        "type": "event",
-        "label": "On Change",
-        "key": "onChange",
-        "context": [
-          {
-            "label": "Field Value",
-            "key": "value"
-          }
-        ]
+        "type": "boolean",
+        "label": "Show calendar?",
+        "key": "showCalendar",
+        "defaultValue": true
       },
       {
         "type": "boolean",

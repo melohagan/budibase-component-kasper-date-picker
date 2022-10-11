@@ -8,6 +8,9 @@
   export let disabled
   export let validation
   export let date
+  export let showCalendar = true
+  export let min
+  export let max
 
   const formContext = getContext("form")
   const formStepContext = getContext("form-step");
@@ -50,10 +53,16 @@
         {label || " "}
     </label>
   </div>
-        <DateInput bind:value={date} on:select={() => fieldApi?.setValue(date)}/>
-        {#if fieldState?.error}
-          <div class="error">{fieldState.error}</div>
-        {/if}
+    <DateInput 
+      bind:value={date} 
+      on:select={() => fieldApi?.setValue(date)} 
+      {showCalendar}
+      {min}
+      {max}
+    />
+    {#if fieldState?.error}
+      <div class="error">{fieldState.error}</div>
+    {/if}
   {/if}
 </div>
 

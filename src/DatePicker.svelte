@@ -68,11 +68,18 @@
   /** Wait with updating the date until a date is selected */
   export let browseWithoutSelecting = false
 
+  /** Show calendar **/
+  export let showCalendar = true
+
   $: browseYear = browseDate.getFullYear()
   function setYear(newYear: number) {
     browseDate.setFullYear(newYear)
     browseDate = browseDate
     browse(browseDate)
+    if (!showCalendar) {
+      setValue(browseDate)
+      dispatch("select")
+    }
   }
 
   $: browseMonth = browseDate.getMonth()
@@ -99,6 +106,10 @@
         browseDate.getMilliseconds()
       )
     )
+    if (!showCalendar) {
+      setValue(browseDate)
+      dispatch("select")
+    }
   }
 
   $: calendarDays = getCalendarDays(browseDate, iLocale.weekStartsOn)
@@ -207,6 +218,7 @@
 <div class="date-time-picker" on:focusout tabindex="0" on:keydown={keydown}>
   <div class="tab-container" tabindex="-1">
     <div class="top">
+      {#if showCalendar}
       <div class="page-button" tabindex="-1" on:click={() => setMonth(browseDate.getMonth() - 1)}>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
           ><path
@@ -215,6 +227,7 @@
           /></svg
         >
       </div>
+      {/if}
       <div class="dropdown month">
         <select
           value={browseMonth}
@@ -265,12 +278,15 @@
           ><path d="M6 0l12 12-12 12z" transform="rotate(90, 12, 12)" /></svg
         >
       </div>
+      {#if showCalendar}
       <div class="page-button" tabindex="-1" on:click={() => setMonth(browseDate.getMonth() + 1)}>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
           ><path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" /></svg
         >
       </div>
+      {/if}
     </div>
+    {#if showCalendar}
     <div class="header">
       {#each Array(7) as _, i}
         {#if i + iLocale.weekStartsOn < 7}
@@ -297,6 +313,7 @@
         {/each}
       </div>
     {/each}
+    {/if}
   </div>
 </div>
 

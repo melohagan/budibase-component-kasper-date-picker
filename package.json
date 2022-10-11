@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@crownframework/svelte-error-boundary": "^1.0.3",
+    "date-fns": "^2.29.3",
     "node-sass": "^7.0.3",
     "svelte": "^3.49.0",
     "tslib": "^2.4.0"
