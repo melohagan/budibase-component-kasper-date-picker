@@ -1,0 +1,75 @@
+{
+  "type": "component",
+  "metadata": {},
+  "schema": {
+    "name": "kasper-date-picker",
+    "friendlyName": "kasper-date-picker",
+    "description": "Date picker that supports locale",
+    "icon": "DateInput",
+    "settings": [
+      {
+        "type": "field/datetime",
+        "label": "Field",
+        "key": "field",
+        "required": true
+      },
+      {
+        "type": "text",
+        "label": "Label",
+        "key": "label"
+      },
+      {
+        "type": "text",
+        "label": "Placeholder",
+        "key": "placeholder"
+      },
+      {
+        "type": "text",
+        "label": "Default value",
+        "key": "defaultValue"
+      },
+      {
+        "type": "text",
+        "label": "Earliest",
+        "key": "min"
+      },
+      {
+        "type": "text",
+        "label": "Latest",
+        "key": "max"
+      },
+      {
+        "type": "text",
+        "label": "Format",
+        "key": "format"
+      },
+      {
+        "type": "text",
+        "label": "Locale",
+        "key": "locale"
+      },
+      {
+        "type": "event",
+        "label": "On Change",
+        "key": "onChange",
+        "context": [
+          {
+            "label": "Field Value",
+            "key": "value"
+          }
+        ]
+      },
+      {
+        "type": "boolean",
+        "label": "Disabled",
+        "key": "disabled",
+        "defaultValue": false
+      },
+      {
+        "type": "validation/datetime",
+        "label": "Validation",
+        "key": "validation"
+      }
+    ]
+  }
+}
