@@ -1,9 +1,10 @@
 <script>
   import { getContext, onDestroy } from "svelte"
   import DateInput from "./DateInput.svelte";
+  import { localeFromDateFnsLocale } from './locale'
   import { parse, isValid } from 'date-fns';
   import { enUS, enGB, zhCN, ru, fr, es, de, ptBR, it, ja, bn, da } from 'date-fns/locale';
-
+  
   export let field
   export let label
   export let defaultValue = null
@@ -55,43 +56,56 @@
     }
   }
 
-  let dateLocale = enUS
+  let kasperLocale = enUS
+  let dfLocale = enUS
   $: {
     if (locale === "enUS") {
-      dateLocale = enUS
+      kasperLocale = localeFromDateFnsLocale(enUS)
+      dfLocale = enUS
     }
     else if (locale === "enGB") {
-      dateLocale = enGB
+      kasperLocale = localeFromDateFnsLocale(enGB)
+      dfLocale = enGB
     }
     else if (locale === "bn") {
-      dateLocale = bn
+      kasperLocale = localeFromDateFnsLocale(bn)
+      dfLocale = bn
     }
     else if (locale === "da") {
-      dateLocale = da
+      kasperLocale = localeFromDateFnsLocale(da)
+      dfLocale = da
     }
     else if (locale === "de") {
-      dateLocale = de
+      kasperLocale = localeFromDateFnsLocale(de)
+      dfLocale = de
     }
     else if (locale === "es") {
-      dateLocale = es
+      kasperLocale = localeFromDateFnsLocale(es)
+      dfLocale = es
     }
     else if (locale === "fr") {
-      dateLocale = fr
+      kasperLocale = localeFromDateFnsLocale(fr)
+      dfLocale = fr
     }
     else if (locale === "it") {
-      dateLocale = it
+      kasperLocale = localeFromDateFnsLocale(it)
+      dfLocale = it
     }
     else if (locale === "ja") {
-      dateLocale = ja
+      kasperLocale = localeFromDateFnsLocale(ja)
+      dfLocale = ja
     }
     else if (locale === "ptBR") {
-      dateLocale = ptBR
+      kasperLocale = localeFromDateFnsLocale(ptBR)
+      dfLocale = ptBR
     }
     else if (locale === "ru") {
-      dateLocale = ru
+      kasperLocale = localeFromDateFnsLocale(ru)
+      dfLocale = ru
     }
     else if (locale === "zhCN") {
-      dateLocale = zhCN
+      kasperLocale = localeFromDateFnsLocale(zhCN)
+      dfLocale = zhCN
     }
   }
 </script>
@@ -118,7 +132,8 @@
       {placeholder}
       defaultDate={defaultValue}
       {disabled}
-      locale={dateLocale}
+      locale={kasperLocale}
+      {dfLocale}
     />
     {#if fieldState?.error}
       <div class="error">{fieldState.error}</div>

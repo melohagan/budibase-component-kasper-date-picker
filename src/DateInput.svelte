@@ -9,7 +9,7 @@
   import { writable } from 'svelte/store'
   import { createEventDispatcher } from 'svelte'
   import { parse as dateParse, isValid } from 'date-fns';
-  import { enGB } from 'date-fns/locale';
+  import { enGB } from 'date-fns/locale'
 
   const dispatch = createEventDispatcher<{ select: undefined }>()
 
@@ -58,6 +58,7 @@
 
   /** Locale object for internationalization */
   export let locale: Locale = {}
+  export let dfLocale = enGB
 
   function valueUpdate(value: Date | null, formatTokens: FormatToken[]) {
     text = toText(value, formatTokens)
@@ -70,7 +71,7 @@
 
   $: {
     if (typeof min === "string") {
-      const parsedDate = dateParse(min, format, new Date(), { locale: enGB });
+      const parsedDate = dateParse(min, format, new Date(), { locale: dfLocale });
       if (isValid(parsedDate)) {
         min = parsedDate
       } else {
@@ -78,7 +79,7 @@
       }
     }
     if (typeof max === "string") {
-      const parsedDate = dateParse(max, format, new Date(), { locale: enGB });
+      const parsedDate = dateParse(max, format, new Date(), { locale: dfLocale });
       if (isValid(parsedDate)) {
         max = parsedDate
       } else {
