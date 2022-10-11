@@ -1,5 +1,5 @@
 # Kasper-date-picker
-This is a readme for your new Budibase plugin.
+A custom date picker plugin for Budibase, adapted from: https://github.com/probablykasper/date-picker-svelte
 
 # Description
 Date picker that supports locale
