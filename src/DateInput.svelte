@@ -98,7 +98,7 @@
   function textUpdate(text: string, formatTokens: FormatToken[]) {
     if (text.length) {
       const result = parse(text, formatTokens, $store)
-      if (result.date !== null) {
+      if (result.date !== null && text.length <= format.length) {
         valid = true
         store.set(result.date)
       } else {

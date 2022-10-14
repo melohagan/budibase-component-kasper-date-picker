@@ -15,7 +15,7 @@ type ParseResult = {
 export function parse(str: string, tokens: FormatToken[], baseDate: Date | null): ParseResult {
   let missingPunctuation = ''
   let valid = true
-
+  
   baseDate = baseDate || new Date(2020, 0, 1, 0, 0, 0, 0)
   let year = baseDate.getFullYear()
   let month = baseDate.getMonth()
@@ -78,10 +78,29 @@ export function parse(str: string, tokens: FormatToken[], baseDate: Date | null)
     }
   }
 
+  function clearTimeIfNotPresent(tokens: FormatToken[]) {
+    let ruleTokens: RuleToken[] = []
+    for (const token of tokens) {
+      if ((token as RuleToken).id) {
+        ruleTokens.push(token as RuleToken)
+      }
+    }
+    if (!ruleTokens.some(token => token.id === "HH")) {
+      hours = 0
+    }
+    if (!ruleTokens.some(token => token.id === "mm")) {
+      minutes = 0
+    }
+    if (!ruleTokens.some(token => token.id === "ss")) {
+      seconds = 0
+    }
+  }
+
   for (const token of tokens) {
     parseToken(token)
     if (!valid) break
   }
+  clearTimeIfNotPresent(tokens)
 
   const monthLength = getMonthLength(year, month)
   if (day > monthLength) {
