@@ -125,7 +125,7 @@
   </div>
     <DateInput 
       bind:value={date} 
-      on:select={() => fieldApi?.setValue(date)} 
+      on:select={() => fieldApi?.setValue(date)}
       {showCalendar}
       {min}
       {max}
@@ -134,6 +134,7 @@
       {disabled}
       locale={kasperLocale}
       {dfLocale}
+      {format}
     />
     {#if fieldState?.error}
       <div class="error">{fieldState.error}</div>

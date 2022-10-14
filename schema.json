@@ -41,6 +41,12 @@
         "key": "max"
       },
       {
+        "type": "text",
+        "label": "Format",
+        "key": "format",
+        "default": "yyyy-MM-dd HH:mm:ss"
+      },
+      {
         "type": "select",
         "label": "Locale",
         "key": "locale",

@@ -11,7 +11,7 @@
   import { parse as dateParse, isValid } from 'date-fns';
   import { enGB } from 'date-fns/locale'
 
-  const dispatch = createEventDispatcher<{ select: undefined }>()
+  const dispatch = createEventDispatcher<{ select: Date }>()
 
   /** Default date to display in picker before value is assigned */
   export let defaultDate
@@ -36,12 +36,15 @@
 
   /** Date value */
   export let value: Date | null = defaultDate
-  $: store.set(value)
+  $: {
+    store.set(value)
+    dispatch('select', value)
+  }
 
   /** The earliest value the user can select */
-  export let min = new Date((defaultDate?.getFullYear() ?? new Date()) - 20, 0, 1)
+  export let min = new Date((defaultDate?.getFullYear() ?? new Date().getFullYear()) - 20, 0, 1)
   /** The latest value the user can select */
-  export let max = new Date((defaultDate?.getFullYear() ?? new Date()), 11, 31, 23, 59, 59, 999)
+  export let max = new Date((defaultDate?.getFullYear() ?? new Date().getFullYear()), 11, 31, 23, 59, 59, 999)
   /** Placeholder text to show when input field is empty */
   export let placeholder = '2020-12-31 23:00:00'
   /** Whether the text is valid */
@@ -70,21 +73,25 @@
   $: textHistory = [textHistory[1], text]
 
   $: {
-    if (typeof min === "string") {
+    if (typeof min === "string" && (min as string).length > 0) {
       const parsedDate = dateParse(min, format, new Date(), { locale: dfLocale });
       if (isValid(parsedDate)) {
         min = parsedDate
       } else {
-        min = new Date((defaultDate?.getFullYear() ?? new Date()) - 20, 0, 1)
+        min = new Date((defaultDate?.getFullYear() ?? new Date().getFullYear()) - 20, 0, 1)
       }
+    } else if (typeof min === "string") {
+      min = new Date((defaultDate?.getFullYear() ?? new Date().getFullYear()) - 20, 0, 1)
     }
-    if (typeof max === "string") {
+    if (typeof max === "string" && (max as string).length > 0) {
       const parsedDate = dateParse(max, format, new Date(), { locale: dfLocale });
       if (isValid(parsedDate)) {
         max = parsedDate
       } else {
-        max = new Date((defaultDate?.getFullYear() ?? new Date()), 11, 31, 23, 59, 59, 999)
+        max = new Date((defaultDate?.getFullYear() ?? new Date().getFullYear()), 11, 31, 23, 59, 59, 999)
       }
+    } else if (typeof max === "string") {
+      max = new Date((defaultDate?.getFullYear() ?? new Date().getFullYear()), 11, 31, 23, 59, 59, 999)
     }
   }
 
