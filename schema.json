@@ -22,7 +22,7 @@
         "type": "text",
         "label": "Placeholder",
         "key": "placeholder",
-        "defaultValue": "2020-12-31 23:00:00"
+        "defaultValue": "Enter a date"
       },
       {
         "type": "text",
@@ -39,12 +39,6 @@
         "type": "text",
         "label": "Latest",
         "key": "max"
-      },
-      {
-        "type": "text",
-        "label": "Format",
-        "key": "format",
-        "default": "yyyy-MM-dd HH:mm:ss"
       },
       {
         "type": "select",
@@ -77,6 +71,19 @@
         "label": "Disabled",
         "key": "disabled",
         "defaultValue": false
+      },
+      {
+        "type": "boolean",
+        "label": "Custom format",
+        "key": "customFormat",
+        "defaultValue": false
+      },
+      {
+        "type": "text",
+        "label": "Format",
+        "key": "format",
+        "dependsOn": "customFormat",
+        "defaultValue": "yyyy-MM-dd HH:mm:ss"
       },
       {
         "type": "validation/datetime",

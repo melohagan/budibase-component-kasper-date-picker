@@ -4,7 +4,7 @@
   import { localeFromDateFnsLocale } from './locale'
   import { parse, isValid } from 'date-fns';
   import { enUS, enGB, zhCN, ru, fr, es, de, ptBR, it, ja, bn, da } from 'date-fns/locale';
-  
+
   export let field
   export let label
   export let defaultValue = null
@@ -15,7 +15,8 @@
   export let min
   export let max
   export let locale = "enUS"
-  export let format = 'yyyy-MM-dd HH:mm:ss'
+  export let format = "MM/dd/yyyy"
+  export let customFormat = false
   export let placeholder
 
   const formContext = getContext("form")
@@ -54,58 +55,77 @@
         defaultValue = null
       }
     }
+    if (!customFormat && defaultFormat) {
+      format = defaultFormat
+    }
   }
 
   let kasperLocale = enUS
   let dfLocale = enUS
+  let defaultFormat = "MM/dd/yyyy"
   $: {
     if (locale === "enUS") {
       kasperLocale = localeFromDateFnsLocale(enUS)
       dfLocale = enUS
+      defaultFormat = "MM/dd/yyyy"
     }
     else if (locale === "enGB") {
       kasperLocale = localeFromDateFnsLocale(enGB)
       dfLocale = enGB
+      defaultFormat = "dd/MM/yyyy"
     }
     else if (locale === "bn") {
       kasperLocale = localeFromDateFnsLocale(bn)
       dfLocale = bn
+      defaultFormat = "dd-MM-yyyy"
     }
     else if (locale === "da") {
       kasperLocale = localeFromDateFnsLocale(da)
       dfLocale = da
+      defaultFormat = "dd-MM-yyyy"
     }
     else if (locale === "de") {
       kasperLocale = localeFromDateFnsLocale(de)
       dfLocale = de
+      defaultFormat = "dd.MM.yyyy"
     }
     else if (locale === "es") {
       kasperLocale = localeFromDateFnsLocale(es)
       dfLocale = es
+      defaultFormat = "dd/MM/yyyy"
     }
     else if (locale === "fr") {
       kasperLocale = localeFromDateFnsLocale(fr)
       dfLocale = fr
+      defaultFormat = "dd/MM/yyyy"
     }
     else if (locale === "it") {
       kasperLocale = localeFromDateFnsLocale(it)
       dfLocale = it
+      defaultFormat = "dd/MM/yyyy"
     }
     else if (locale === "ja") {
       kasperLocale = localeFromDateFnsLocale(ja)
       dfLocale = ja
+      defaultFormat = "yyyy/MM/dd"
     }
     else if (locale === "ptBR") {
       kasperLocale = localeFromDateFnsLocale(ptBR)
       dfLocale = ptBR
+      defaultFormat = "dd/MM/yyyy"
     }
     else if (locale === "ru") {
       kasperLocale = localeFromDateFnsLocale(ru)
       dfLocale = ru
+      defaultFormat = "dd.MM.yyyy"
     }
     else if (locale === "zhCN") {
       kasperLocale = localeFromDateFnsLocale(zhCN)
       dfLocale = zhCN
+      defaultFormat = "yyyy/MM/dd"
+    }
+    if (!customFormat) {
+      format = defaultFormat
     }
   }
 </script>
