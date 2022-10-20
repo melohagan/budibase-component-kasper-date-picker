@@ -68,6 +68,12 @@
       },
       {
         "type": "boolean",
+        "label": "Close on selection",
+        "key": "closeOnSelection",
+        "defaultValue": false
+      },
+      {
+        "type": "boolean",
         "label": "Disabled",
         "key": "disabled",
         "defaultValue": false
