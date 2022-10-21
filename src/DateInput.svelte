@@ -9,12 +9,14 @@
   import { writable } from 'svelte/store'
   import { createEventDispatcher } from 'svelte'
   import { parse as dateParse, isValid } from 'date-fns';
-  import { enGB } from 'date-fns/locale'
+  import { enUS } from 'date-fns/locale'
+  import zonedTimeToUtc from 'date-fns-tz/zonedTimeToUtc'
 
   const dispatch = createEventDispatcher<{ select: Date }>()
 
   /** Default date to display in picker before value is assigned */
   export let defaultDate
+  export let ignoreTimezones = false
 
   // inner date value store for preventing value updates (and also
   // text updates as a result) when date is unchanged
@@ -27,6 +29,9 @@
           innerStore.set(null)
           value = d
         } else if (d.getTime() !== $innerStore?.getTime()) {
+          if (ignoreTimezones) {
+            d = zonedTimeToUtc(d, Intl.DateTimeFormat().resolvedOptions().timeZone)
+          }
           innerStore.set(d)
           value = d
         }
@@ -61,7 +66,7 @@
 
   /** Locale object for internationalization */
   export let locale: Locale = {}
-  export let dfLocale = enGB
+  export let dfLocale = enUS
 
   function valueUpdate(value: Date | null, formatTokens: FormatToken[]) {
     text = toText(value, formatTokens)

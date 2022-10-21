@@ -1,6 +1,6 @@
 {
   "name": "kasper-date-picker",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Date picker that supports locale",
   "license": "MIT",
   "svelte": "index.js",
@@ -12,6 +12,7 @@
   "dependencies": {
     "@crownframework/svelte-error-boundary": "^1.0.3",
     "date-fns": "^2.29.3",
+    "date-fns-tz": "^1.3.7",
     "node-sass": "^7.0.3",
     "svelte": "^3.49.0",
     "tslib": "^2.4.0"

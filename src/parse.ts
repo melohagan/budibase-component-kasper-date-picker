@@ -1,4 +1,5 @@
 import { getMonthLength } from './date-utils'
+import zonedTimeToUtc from 'date-fns-tz/zonedTimeToUtc'
 
 type RuleToken = {
   id: string
@@ -24,7 +25,7 @@ export function parse(str: string, tokens: FormatToken[], baseDate: Date | null)
   let minutes = baseDate.getMinutes()
   let seconds = baseDate.getSeconds()
   const ms = baseDate.getMilliseconds()
-
+  
   function parseString(token: string) {
     for (let i = 0; i < token.length; i++) {
       if (str.startsWith(token[i])) {
@@ -108,7 +109,7 @@ export function parse(str: string, tokens: FormatToken[], baseDate: Date | null)
   }
 
   return {
-    date: valid ? new Date(year, month, day, hours, minutes, seconds, ms) : null,
+    date: valid ? zonedTimeToUtc(new Date(year, month, day, hours, minutes, seconds, ms), Intl.DateTimeFormat().resolvedOptions().timeZone) : null,
     missingPunctuation: missingPunctuation,
   }
 }

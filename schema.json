@@ -80,6 +80,12 @@
       },
       {
         "type": "boolean",
+        "label": "Ignore time zones",
+        "key": "ignoreTimezones",
+        "defaultValue": false
+      },
+      {
+        "type": "boolean",
         "label": "Custom format",
         "key": "customFormat",
         "defaultValue": false

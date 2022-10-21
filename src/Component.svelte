@@ -18,6 +18,7 @@
   export let format = "MM/dd/yyyy"
   export let customFormat = false
   export let closeOnSelection = false
+  export let ignoreTimezones = false
   export let placeholder
 
   const formContext = getContext("form")
@@ -157,6 +158,7 @@
       {dfLocale}
       {format}
       {closeOnSelection}
+      {ignoreTimezones}
     />
     {#if fieldState?.error}
       <div class="error">{fieldState.error}</div>
