@@ -79,7 +79,10 @@
 
   $: {
     if (typeof min === "string" && (min as string).length > 0) {
-      const parsedDate = dateParse(min, format, new Date(), { locale: dfLocale });
+      let parsedDate = dateParse(min, format, new Date(), { locale: dfLocale })
+      if (!isValid(parsedDate)) {
+        parsedDate = dateParse(min, "yyyy-MM-dd HH:mm:ss", new Date())
+      }
       if (isValid(parsedDate)) {
         min = parsedDate
       } else {
@@ -89,7 +92,10 @@
       min = new Date((defaultDate?.getFullYear() ?? new Date().getFullYear()) - 20, 0, 1)
     }
     if (typeof max === "string" && (max as string).length > 0) {
-      const parsedDate = dateParse(max, format, new Date(), { locale: dfLocale });
+      let parsedDate = dateParse(max, format, new Date(), { locale: dfLocale })
+      if (!isValid(parsedDate)) {
+        parsedDate = dateParse(max, "yyyy-MM-dd HH:mm:ss", new Date())
+      }
       if (isValid(parsedDate)) {
         max = parsedDate
       } else {
