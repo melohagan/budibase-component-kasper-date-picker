@@ -175,8 +175,7 @@
     }
   }
 
-  function onSelect(e: CustomEvent<undefined>) {
-    dispatch('select', e.detail)
+  function onSelect() {
     if (closeOnSelection) {
       visible = false
     }
@@ -194,7 +193,6 @@
       on:focus={() => (visible = true)}
       on:mousedown={() => (visible = true)}
       on:input={input}
-      on:change
     />
   </div>
   {#if visible && !disabled}

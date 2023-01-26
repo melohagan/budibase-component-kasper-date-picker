@@ -104,8 +104,14 @@
       },
       {
         "type": "event",
-        "key": "change",
-        "label": "On Change"
+        "label": "On Change",
+        "key": "onChange",
+        "context": [
+          {
+            "label": "Field Value",
+            "key": "value"
+          }
+        ]
       }
     ]
   }

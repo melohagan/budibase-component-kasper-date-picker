@@ -20,7 +20,7 @@
   export let closeOnSelection = false
   export let ignoreTimezones = false
   export let placeholder
-  export let change
+  export let onChange
 
   const formContext = getContext("form")
   const formStepContext = getContext("form-step");
@@ -149,12 +149,12 @@
     <DateInput 
       bind:value={date} 
       on:select={e => {
-        fieldApi?.setValue(date)
-        if (date !== e.detail) {
-          change(date)
+        const changed = fieldApi?.setValue(e.detail)
+        if (onChange && changed) {
+          onChange({ value: e.detail })
         }
       }}
-      on:change={change}
+      on:change={onChange}
       {showCalendar}
       {min}
       {max}
