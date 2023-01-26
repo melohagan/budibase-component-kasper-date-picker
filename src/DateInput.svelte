@@ -194,6 +194,7 @@
       on:focus={() => (visible = true)}
       on:mousedown={() => (visible = true)}
       on:input={input}
+      on:change
     />
   </div>
   {#if visible && !disabled}

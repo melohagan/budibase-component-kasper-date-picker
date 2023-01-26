@@ -101,6 +101,11 @@
         "type": "validation/datetime",
         "label": "Validation",
         "key": "validation"
+      },
+      {
+        "type": "event",
+        "key": "change",
+        "label": "On Change"
       }
     ]
   }
