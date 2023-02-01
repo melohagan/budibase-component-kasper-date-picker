@@ -42,3 +42,4 @@ Select from a list of common locales!
 
 ```
 
+The default *Earliest* date is `2001-01-01 00:00:00`. If you would like to use this field for Date of Birth, then set that value to `1900-01-01 00:00:00` for example. 
