@@ -40,6 +40,6 @@ Select from a list of common locales!
 ### Placeholder, default value and min/max range
 <img width="885" alt="Screenshot 2022-10-11 at 19 35 10" src="https://user-images.githubusercontent.com/101575380/195172165-679b2ec9-138c-41a9-b60a-a191d9fd1c17.png">
 
-```
+<br />
 
 The default *Earliest* date is `2001-01-01 00:00:00`. If you would like to use this field for Date of Birth, then set that value to `1900-01-01 00:00:00` for example. 
