@@ -42,6 +42,13 @@
   /** Date value */
   export let value: Date | null = defaultDate
   $: {
+    if (typeof value === "string") {
+      try {
+        value = new Date(value)
+      } catch (e) {
+        value = null
+      }
+    }
     store.set(value)
     dispatch('select', value)
   }
