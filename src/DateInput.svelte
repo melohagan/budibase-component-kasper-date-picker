@@ -205,6 +205,7 @@
         {locale}
         {browseWithoutSelecting}
         {showCalendar}
+        parsedPlaceholder={dateParse(placeholder, format, new Date(), { locale: dfLocale })}
       />
     </div>
   {/if}

@@ -4,6 +4,7 @@
   import { getInnerLocale } from './locale'
   import type { Locale } from './locale'
   import { createEventDispatcher } from 'svelte'
+  import { isValid } from 'date-fns'
 
   const dispatch = createEventDispatcher<{ select: undefined }>()
 
@@ -29,10 +30,16 @@
 
   /** Default Date to use */
   const defaultDate = new Date()
+  /** Use placeholder to set starting display date if no default */
+  export let parsedPlaceholder: Date | null = null
 
   /** The date shown in the popup when none is selected */
-  let browseDate = value ? cloneDate(value) : cloneDate(defaultDate)
-
+  let browseDate = value
+    ? cloneDate(value)
+    : isValid(parsedPlaceholder)
+    ? cloneDate(parsedPlaceholder)
+    : cloneDate(defaultDate)
+    
   /** The earliest year the user can select */
   export let min = new Date(defaultDate.getFullYear() - 20, 0, 1)
   /** The latest year the user can select */
