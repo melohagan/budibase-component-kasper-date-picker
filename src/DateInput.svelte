@@ -182,7 +182,7 @@
   }
 </script>
 
-<div on:focusout={onFocusOut} >
+<div class="pickerContainer" on:focusout={onFocusOut} >
   <div class="spectrum-Textfield spectrum-Textfield-input spectrum-InputGroup-input" on:keydown={keydown}>
     <input
       class:invalid={!valid}
@@ -211,6 +211,9 @@
 </div>
 
 <style lang="sass">
+  .pickerContainer
+    height: 32px
+    overflow: visible
   .spectrum-Textfield
     width: 100%
   input
@@ -234,9 +237,7 @@
       box-shadow: 0px 0px 0px 2px rgba(#f92f72, 0.5)
   .picker
     display: none
-    position: fixed
-    width: 100vw
-    height: 100vh
+    position: sticky
     z-index: 999
     &.visible
       display: block
