@@ -145,7 +145,6 @@
       >
         {label || " "}
     </label>
-  </div>
     <DateInput 
       bind:value={date} 
       on:select={e => {
@@ -170,6 +169,7 @@
     {#if fieldState?.error}
       <div class="error">{fieldState.error}</div>
     {/if}
+  </div>
   {/if}
 </div>
 

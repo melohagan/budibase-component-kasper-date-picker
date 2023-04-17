@@ -182,7 +182,7 @@
   }
 </script>
 
-<div class="pickerContainer" on:focusout={onFocusOut} >
+<div class="spectrum-Form-itemField" on:focusout={onFocusOut} >
   <div class="spectrum-Textfield spectrum-Textfield-input spectrum-InputGroup-input" on:keydown={keydown}>
     <input
       class:invalid={!valid}
@@ -211,15 +211,13 @@
 </div>
 
 <style lang="sass">
-  .pickerContainer
-    height: 32px
-    overflow: visible
   .spectrum-Textfield
-    width: 100%
+    width: auto
   input
     color: var(--date-picker-foreground, #000000)
     background: var(--date-picker-background, #ffffff)
     min-width: 0px
+    width: 100%
     box-sizing: border-box
     border: none
     outline: none
