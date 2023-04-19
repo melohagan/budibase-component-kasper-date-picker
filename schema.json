@@ -6,6 +6,10 @@
     "friendlyName": "kasper-date-picker",
     "description": "Date picker that supports locale",
     "icon": "DateInput",
+    "styles": [
+      "padding",
+      "size"
+    ],
     "settings": [
       {
         "type": "field/datetime",
