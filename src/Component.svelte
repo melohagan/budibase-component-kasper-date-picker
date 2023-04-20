@@ -10,7 +10,6 @@
   export let defaultValue = null
   export let disabled = false
   export let validation
-  export let date
   export let showCalendar = true
   export let min
   export let max
@@ -147,7 +146,7 @@
     </label>
   </div>
     <DateInput 
-      bind:value={date} 
+      bind:value={fieldState.value} 
       on:select={e => {
         const changed = fieldApi?.setValue(e.detail)
         if (onChange && changed) {
