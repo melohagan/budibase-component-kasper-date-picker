@@ -1,6 +1,6 @@
 {
   "name": "kasper-date-picker",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "Date picker that supports locale",
   "license": "MIT",
   "svelte": "index.js",
