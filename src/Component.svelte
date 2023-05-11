@@ -146,7 +146,7 @@
     </label>
   </div>
     <DateInput 
-      bind:value={fieldState.value} 
+      value={fieldState.value} 
       on:select={e => {
         const changed = fieldApi?.setValue(e.detail)
         if (onChange && changed) {
