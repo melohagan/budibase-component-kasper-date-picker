@@ -75,6 +75,9 @@
   export let locale: Locale = {}
   export let dfLocale = enUS
 
+  export let labelPos = ""
+  $: overlayOffsetClass = labelPos === "above" ? "above-label" : ""
+
   function valueUpdate(value: Date | null, formatTokens: FormatToken[]) {
     text = toText(value, formatTokens)
   }
@@ -189,10 +192,11 @@
   }
 </script>
 
-<div class="pickerContainer" on:focusout={onFocusOut} >
-  <div class="spectrum-Textfield spectrum-Textfield-input spectrum-InputGroup-input" on:keydown={keydown}>
+<div class="spectrumInputGroup" on:focusout={onFocusOut} >
+  <div class="spectrum-Textfield spectrum-InputGroup-textfield" on:keydown={keydown}>
     <input
       class:invalid={!valid}
+      class="spectrum-Textfield-input spectrum-InputGroup-input"
       type="text"
       bind:value={text}
       {placeholder}
@@ -202,51 +206,37 @@
       on:input={input}
     />
   </div>
-  {#if visible && !disabled}
-    <div class="picker" class:visible transition:fly={{ duration: 80, easing: cubicInOut, y: -5 }}>
-      <DateTimePicker
-        on:select={onSelect}
-        bind:value={$store}
-        {min}
-        {max}
-        {locale}
-        {browseWithoutSelecting}
-        {showCalendar}
-        parsedPlaceholder={dateParse(placeholder, format, new Date(), { locale: dfLocale })}
-      />
-    </div>
-  {/if}
 </div>
+{#if visible && !disabled}
+<div class={`overlay ${overlayOffsetClass}`} class:visible transition:fly={{ duration: 80, easing: cubicInOut, y: -5 }}>
+  <DateTimePicker
+    on:select={onSelect}
+    bind:value={$store}
+    {min}
+    {max}
+    {locale}
+    {browseWithoutSelecting}
+    {showCalendar}
+    parsedPlaceholder={dateParse(placeholder, format, new Date(), { locale: dfLocale })}
+  />
+</div>
+{/if}
 
 <style lang="sass">
-  .pickerContainer
-    height: 32px
-    overflow: visible
   .spectrum-Textfield
     width: 100%
-  input
-    color: var(--date-picker-foreground, #000000)
-    background: var(--date-picker-background, #ffffff)
-    min-width: 0px
-    box-sizing: border-box
-    border: none
-    outline: none
-    transition: all 80ms cubic-bezier(0.4, 0.0, 0.2, 1)
-    &:focus
-      border-color: var(--date-picker-highlight-border, #0269f7)
-      box-shadow: 0px 0px 0px 2px var(--date-picker-highlight-shadow, rgba(#0269f7, 0.4))
-    &:disabled
-      opacity: 0.5
   .invalid
     border: 1px solid rgba(#f92f72, 0.5)
     background-color: rgba(#f92f72, 0.1)
     &:focus
       border-color: #f92f72
       box-shadow: 0px 0px 0px 2px rgba(#f92f72, 0.5)
-  .picker
-    display: none
-    position: sticky
-    z-index: 999
-    &.visible
-      display: block
+  .overlay
+    position: fixed;
+    z-index: 999;
+    width: 100vw;
+    height: 100vh;
+    max-height: 100%;
+  .above-label
+    margin-top: 56px
 </style>

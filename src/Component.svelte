@@ -32,7 +32,8 @@
   $: formField = formApi?.registerField(field, "datetime", defaultValue, disabled, validation, formStep)
 
   let fieldApi;
-  let fieldState; 
+  let fieldState;
+  let visible; 
 
   $: unsubscribe = formField?.subscribe((value) => {
     fieldState = value?.fieldState;
@@ -132,11 +133,10 @@
   }
 </script>
 
-<div use:styleable={$component.styles}>
+<div class="spectrum-Form-item" class:visible use:styleable={$component.styles}>
   {#if !formContext}
     <div class="placeholder">Form components need to be wrapped in a form.</div>
   {:else}
-  <div class="spectrum-Form-item">
     <label
         class:hidden={!label}
         for={fieldState?.fieldId}
@@ -144,31 +144,32 @@
       >
         {label || " "}
     </label>
-  </div>
-    <DateInput 
-      value={fieldState.value} 
-      on:select={e => {
-        const changed = fieldApi?.setValue(e.detail)
-        if (onChange && changed) {
-          onChange({ value: e.detail })
-        }
-      }}
-      on:change={onChange}
-      {showCalendar}
-      {min}
-      {max}
-      {placeholder}
-      defaultDate={defaultValue}
-      disabled={fieldState?.disabled ?? disabled}
-      locale={kasperLocale}
-      {dfLocale}
-      {format}
-      {closeOnSelection}
-      {ignoreTimezones}
-    />
-    {#if fieldState?.error}
-      <div class="error">{fieldState.error}</div>
-    {/if}
+      <DateInput 
+        bind:visible
+        value={fieldState.value} 
+        on:select={e => {
+          const changed = fieldApi?.setValue(e.detail)
+          if (onChange && changed) {
+            onChange({ value: e.detail })
+          }
+        }}
+        on:change={onChange}
+        {showCalendar}
+        {min}
+        {max}
+        {placeholder}
+        defaultDate={defaultValue}
+        disabled={fieldState?.disabled ?? disabled}
+        locale={kasperLocale}
+        {labelPos}
+        {dfLocale}
+        {format}
+        {closeOnSelection}
+        {ignoreTimezones}
+      />
+      {#if fieldState?.error}
+        <div class="error">{fieldState.error}</div>
+      {/if}
   {/if}
 </div>
 
@@ -187,10 +188,20 @@
   .spectrum-FieldLabel--left {
     padding-right: var(--spectrum-global-dimension-size-200);
   }
+  .spectrum-FieldLabel--above {
+    padding-bottom: 32px;
+  }
   .error {
     color: var(--spectrum-semantic-negative-color-default, 
                var(--spectrum-global-color-red-500));
     font-size: var(--spectrum-global-dimension-font-size-75);
     margin-top: var(--spectrum-global-dimension-size-75);
+  }
+  .spectrum-Form-item.above {
+    display: flex;
+    flex-direction: column;
+  }
+  .visible {
+    overflow: hidden;
   }
 </style>
