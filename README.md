@@ -1,3 +1,9 @@
+# Note this plugin will no longer work with the svelte 5 upgrade in Budibase v3.24
+
+To migrate your own existing plugins to svelte 5, get the latest version of the [Budi CLI](https://docs.budibase.com/docs/budibase-cli-setup).
+
+Then run the command: `budi plugins --migrate-svelte5`
+
 # Kasper-date-picker
 A custom date picker plugin for Budibase, adapted from: https://github.com/probablykasper/date-picker-svelte
 
